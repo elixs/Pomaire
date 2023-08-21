@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://dds4wdothfjku"]
+
+[ext_resource type="PackedScene" uid="uid://cx0rsvmixd5ss" path="res://scenes/floor_3d.tscn" id="1_6x1yd"]
+[ext_resource type="PackedScene" uid="uid://boqjondfk4ftm" path="res://scenes/ball_3d.tscn" id="2_1qx6g"]
+[ext_resource type="Texture2D" uid="uid://djg85fgqrsanl" path="res://icon.svg" id="3_v30th"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e2vj0"]
+bounce = 1.0
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_40uex"]
+panorama = ExtResource("3_v30th")
+
+[sub_resource type="Sky" id="Sky_qpgx7"]
+sky_material = SubResource("PanoramaSkyMaterial_40uex")
+
+[sub_resource type="Environment" id="Environment_36yf2"]
+background_mode = 2
+sky = SubResource("Sky_qpgx7")
+
+[node name="Main3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.936213, 0.351433, 0, -0.351433, 0.936213, 0, 3.31956, 3.4112)
+
+[node name="Floor3D" parent="." instance=ExtResource("1_6x1yd")]
+physics_material_override = SubResource("PhysicsMaterial_e2vj0")
+
+[node name="Ball3D" parent="." instance=ExtResource("2_1qx6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.99217, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_36yf2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
