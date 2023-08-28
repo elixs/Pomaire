@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca6git5xdb13d"]
+[gd_scene load_steps=5 format=3 uid="uid://ca6git5xdb13d"]
 
 [ext_resource type="PackedScene" uid="uid://drpfjkmlbgupv" path="res://scenes/floor.tscn" id="1_2edll"]
 [ext_resource type="PackedScene" uid="uid://dio1bwpro6vr0" path="res://scenes/san_martin.tscn" id="2_xhkbi"]
+[ext_resource type="PackedScene" uid="uid://d2amhxhr56865" path="res://scenes/enemy.tscn" id="3_e3hxb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_34hd0"]
 bounce = 1.0
@@ -15,3 +16,6 @@ physics_material_override = SubResource("PhysicsMaterial_34hd0")
 
 [node name="SanMartin" parent="." instance=ExtResource("2_xhkbi")]
 position = Vector2(113, 57)
+
+[node name="Floor2" parent="." instance=ExtResource("3_e3hxb")]
+position = Vector2(281, 39)

@@ -1,9 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://dio1bwpro6vr0"]
+[gd_scene load_steps=35 format=3 uid="uid://dio1bwpro6vr0"]
 
 [ext_resource type="Script" path="res://scenes/san_martin.gd" id="1_rwl31"]
+[ext_resource type="PackedScene" uid="uid://dgtooxn5361l" path="res://scenes/bullet.tscn" id="2_mqd8c"]
+[ext_resource type="PackedScene" uid="uid://ddt05rnrysmus" path="res://scenes/ui/pause_menu.tscn" id="4_7vxv6"]
 [ext_resource type="Texture2D" uid="uid://d2h1brcsm7cov" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/humanoids/white.png" id="5_3jm1x"]
+[ext_resource type="PackedScene" uid="uid://ddaxmm1wol6ej" path="res://scenes/ui/shots_counter.tscn" id="5_3ye74"]
+[ext_resource type="PackedScene" uid="uid://de4vkhl8t8jrr" path="res://scenes/ui/hud.tscn" id="6_6itj0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pojv8"]
+radius = 5.0
 height = 32.0
 
 [sub_resource type="Animation" id="Animation_53ciw"]
@@ -326,7 +331,10 @@ transitions = ["idle", "run", SubResource("AnimationNodeStateMachineTransition_g
 graph_offset = Vector2(39, -86)
 
 [node name="SanMartin" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_rwl31")
+bullet_scene = ExtResource("2_mqd8c")
 
 [node name="Pivot" type="Node2D" parent="."]
 
@@ -335,6 +343,9 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_3jm1x")
 hframes = 4
 vframes = 3
+
+[node name="BulletSpawn" type="Marker2D" parent="Pivot"]
+position = Vector2(15, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_pojv8")
@@ -347,3 +358,12 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_01e3l")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_7vxv6")]
+visible = false
+
+[node name="ShotsCounter" parent="CanvasLayer" instance=ExtResource("5_3ye74")]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("6_6itj0")]
