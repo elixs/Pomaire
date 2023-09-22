@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2kx6ger3n46w"]
+
+[ext_resource type="Script" path="res://scenes/dust.gd" id="1_0idn0"]
+
+[sub_resource type="Curve" id="Curve_bwfvm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.85657, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nisbd"]
+curve = SubResource("Curve_bwfvm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cjggm"]
+emission_shape = 3
+emission_box_extents = Vector3(4, 0.1, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 30.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 70.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_nisbd")
+color = Color(0.921569, 0.827451, 0.12549, 1)
+
+[node name="Dust" type="GPUParticles2D"]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_cjggm")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_0idn0")

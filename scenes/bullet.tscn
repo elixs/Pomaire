@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgtooxn5361l"]
+[gd_scene load_steps=8 format=3 uid="uid://dgtooxn5361l"]
 
 [ext_resource type="Texture2D" uid="uid://brtpkbbqfeuov" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/projectiles/proj_blue.png" id="1_fv6oj"]
 [ext_resource type="Script" path="res://scenes/bullet.gd" id="1_vbkmv"]
+[ext_resource type="PackedScene" uid="uid://d2kx6ger3n46w" path="res://scenes/dust.tscn" id="2_0o6mh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5tbed"]
 radius = 7.0
@@ -48,6 +49,7 @@ _data = {
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_vbkmv")
+dust_scene = ExtResource("2_0o6mh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5tbed")
@@ -61,3 +63,6 @@ hframes = 3
 libraries = {
 "": SubResource("AnimationLibrary_diqgj")
 }
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(12, 0)

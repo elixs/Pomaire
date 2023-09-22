@@ -21,9 +21,13 @@ var max_health = 100
 @onready var shots_counter: MarginContainer = $CanvasLayer/ShotsCounter
 @onready var hud: MarginContainer = $CanvasLayer/HUD
 
+@onready var dust_spawn = $DustSpawn
 
 @export var bullet_scene: PackedScene
+@export var dust_scene: PackedScene
+@onready var sprite_2d = $Pivot/Sprite2D
 
+var was_on_floor = false
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -67,6 +71,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			playback.travel("fall")
 	
+	# particles
+	if not was_on_floor and is_on_floor():
+		spawn_dust()
+	was_on_floor = is_on_floor()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -81,7 +89,22 @@ func fire():
 	bullet.global_position = bullet_spawn.global_position
 	bullet.rotation = bullet_spawn.global_position.direction_to(get_global_mouse_position()).angle()
 	Game.shots += 1
-
+	
+	var tween = create_tween()
+	tween.tween_property(sprite_2d, "scale", Vector2.ONE * 4, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.parallel().tween_property(sprite_2d, "position:y", -19, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(sprite_2d, "scale", Vector2.ONE * 2, 0.1)
+	tween.parallel().tween_property(sprite_2d, "position:y", -3, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	
+	
 func take_damage():
 	if health > 0:
 		health = max(health - 10, 0)
+
+
+func spawn_dust():
+	if not dust_scene:
+		return
+	var dust = dust_scene.instantiate()
+	add_child(dust)
+	dust.global_position = dust_spawn.global_position

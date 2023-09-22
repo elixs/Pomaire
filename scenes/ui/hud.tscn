@@ -17,6 +17,7 @@ mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
@@ -26,4 +27,5 @@ text = "Health"
 [node name="HealthBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_type_variation = &"HealthBar"
 step = 1.0

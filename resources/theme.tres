@@ -1,13 +1,26 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cr6acvmkqo3cr"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cr6acvmkqo3cr"]
 
 [ext_resource type="FontFile" uid="uid://d28eviiijl1rj" path="res://assets/fonts/misto/Misto.ttf" id="1_6hsmd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2a6e"]
+bg_color = Color(0.466667, 0.572549, 0.223529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxlam"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l87v6"]
+bg_color = Color(1, 1, 1, 1)
 
 [resource]
 default_font = ExtResource("1_6hsmd")
 default_font_size = 6
 BigLabel/base_type = &"Label"
 BigLabel/font_sizes/font_size = 12
+HealthBar/base_type = &"ProgressBar"
+HealthBar/styles/fill = SubResource("StyleBoxFlat_j2a6e")
 MarginContainer/constants/margin_bottom = 6
 MarginContainer/constants/margin_left = 6
 MarginContainer/constants/margin_right = 6
 MarginContainer/constants/margin_top = 6
+ProgressBar/styles/background = SubResource("StyleBoxFlat_vxlam")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_l87v6")
