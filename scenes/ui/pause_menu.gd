@@ -5,7 +5,7 @@ extends MarginContainer
 @onready var menu: Button = %Menu
 @onready var exit: Button = %Exit
 
-@export var main_menu: PackedScene
+#@export var main_menu: PackedScene
 
 func _ready() -> void:
 	hide()
@@ -33,9 +33,10 @@ func _on_retry_pressed():
 
 
 func _on_menu_pressed():
-	if main_menu:
-		get_tree().change_scene_to_packed(main_menu)
-		get_tree().paused = false
+#	if main_menu:
+#		get_tree().change_scene_to_packed(main_menu)
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 
 func _on_exit_pressed():
