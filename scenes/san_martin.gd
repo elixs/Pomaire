@@ -32,6 +32,7 @@ var was_on_floor = false
 func _ready() -> void:
 	animation_tree.active = true
 	hud.set_health(health)
+#	health = guardado
 
 
 func _physics_process(delta: float) -> void:

@@ -21,7 +21,6 @@ func _on_body_entered(body: Node2D):
 		var pos = ray_cast_2d.get_collision_point()
 		var normal = ray_cast_2d.get_collision_normal()
 		spawn_dust(pos, normal.angle() + PI / 2)
-		Debug.dprint(normal)
 		
 
 func spawn_dust(pos, rot):
