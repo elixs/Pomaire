@@ -12,6 +12,9 @@ var health = 100:
 			hud.set_health(health)
 var max_health = 100
 
+
+var current_pickable: Pickable = null
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/playback")
@@ -26,6 +29,13 @@ var max_health = 100
 @export var bullet_scene: PackedScene
 @export var dust_scene: PackedScene
 @onready var sprite_2d = $Pivot/Sprite2D
+
+@onready var pickable_area: PickableArea = $Pivot/PickableArea
+
+@onready var pickable_marker = $Pivot/PickableMarker
+@onready var pickable_drop_marker = $Pivot/PickableDropMarker
+
+
 
 var was_on_floor = false
 
@@ -55,6 +65,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire"):
 		fire()
 	
+	if Input.is_action_just_pressed("interact"):
+		interact()
+	
 	# animation
 	
 	if move_input != 0:
@@ -76,6 +89,7 @@ func _physics_process(delta: float) -> void:
 	if not was_on_floor and is_on_floor():
 		spawn_dust()
 	was_on_floor = is_on_floor()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -109,3 +123,13 @@ func spawn_dust():
 	var dust = dust_scene.instantiate()
 	add_child(dust)
 	dust.global_position = dust_spawn.global_position
+
+func interact():
+	var pickable: Pickable = pickable_area.get_pickable()
+	if current_pickable:
+		current_pickable.drop(get_parent(), pickable_drop_marker.global_position)
+		current_pickable = null
+	elif pickable:
+		current_pickable = pickable
+		pickable.pick(pivot, pickable_marker.global_position)
+

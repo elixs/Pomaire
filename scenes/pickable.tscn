@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://xkdktq3dfmxl"]
+
+[ext_resource type="Script" path="res://scenes/pickable.gd" id="1_qmx11"]
+[ext_resource type="Texture2D" uid="uid://dmvuvfke4w2cf" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/misc/key.png" id="1_xeglx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_himwo"]
+size = Vector2(16, 26)
+
+[node name="Pickable" type="RigidBody2D"]
+script = ExtResource("1_qmx11")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_xeglx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_himwo")

@@ -6,6 +6,7 @@ var meh = Vector2(13.5, 56.98)
 
 var owo = 12
 
+
 var shots = 0:
 	set(value):
 		shots = value

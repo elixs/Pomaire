@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dio1bwpro6vr0"]
+[gd_scene load_steps=38 format=3 uid="uid://dio1bwpro6vr0"]
 
 [ext_resource type="Script" path="res://scenes/san_martin.gd" id="1_rwl31"]
 [ext_resource type="PackedScene" uid="uid://dgtooxn5361l" path="res://scenes/bullet.tscn" id="2_mqd8c"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://d2h1brcsm7cov" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/humanoids/white.png" id="5_3jm1x"]
 [ext_resource type="PackedScene" uid="uid://ddaxmm1wol6ej" path="res://scenes/ui/shots_counter.tscn" id="5_3ye74"]
 [ext_resource type="PackedScene" uid="uid://de4vkhl8t8jrr" path="res://scenes/ui/hud.tscn" id="6_6itj0"]
+[ext_resource type="Script" path="res://scenes/pickable_area.gd" id="8_axdo7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw0lo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pojv8"]
 radius = 5.0
@@ -349,6 +352,19 @@ vframes = 3
 
 [node name="BulletSpawn" type="Marker2D" parent="Pivot"]
 position = Vector2(11, -13)
+
+[node name="PickableArea" type="Area2D" parent="Pivot"]
+script = ExtResource("8_axdo7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/PickableArea"]
+position = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_yw0lo")
+
+[node name="PickableDropMarker" type="Marker2D" parent="Pivot"]
+position = Vector2(20, 0)
+
+[node name="PickableMarker" type="Marker2D" parent="Pivot"]
+position = Vector2(-10, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_pojv8")
