@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var jump_speed = 200
 var acceleration = 1000
 var gravity = 300
-@onready var cannon = $Pivot/Cannon
 
 var health = 100:
 	set(value):
@@ -36,6 +35,8 @@ var current_pickable: Pickable = null
 @onready var pickable_marker = $Pivot/PickableMarker
 @onready var pickable_drop_marker = $Pivot/PickableDropMarker
 
+@onready var cannon: Sprite2D = $Pivot/CannonPivot/Cannon
+@onready var cannon_pivot: Node2D = $Pivot/CannonPivot
 
 
 var was_on_floor = false
@@ -90,6 +91,8 @@ func _physics_process(delta: float) -> void:
 	if not was_on_floor and is_on_floor():
 		spawn_dust()
 	was_on_floor = is_on_floor()
+	
+	cannon_pivot.global_rotation = (get_global_mouse_position() - global_position).angle()
 
 
 func _input(event: InputEvent) -> void:
@@ -111,7 +114,6 @@ func fire():
 	tween.parallel().tween_property(sprite_2d, "position:y", -19, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(sprite_2d, "scale", Vector2.ONE * 2, 0.1)
 	tween.parallel().tween_property(sprite_2d, "position:y", -3, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	cannon.fire()
 	
 func take_damage():
 	if health > 0:

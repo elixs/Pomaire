@@ -1,25 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cflx11ole8h75"]
+[gd_scene load_steps=13 format=3 uid="uid://cflx11ole8h75"]
 
 [ext_resource type="Texture2D" uid="uid://dmm4d48e1cdpv" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/enemies/cannon.png" id="1_2hvrk"]
 [ext_resource type="Script" path="res://scenes/cannon.gd" id="2_gkcay"]
 [ext_resource type="PackedScene" uid="uid://cktmwhn76bbbn" path="res://scenes/cannon_bullet.tscn" id="3_vpuc7"]
 [ext_resource type="PackedScene" uid="uid://cvxbe5lib7s8e" path="res://components/spawn_component.tscn" id="4_kdow8"]
-
-[sub_resource type="Animation" id="Animation_ayqji"]
-resource_name = "load"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
 
 [sub_resource type="Animation" id="Animation_1u1fi"]
 length = 0.001
@@ -34,6 +18,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_kbvue"]
@@ -51,6 +59,70 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_ayqji"]
+resource_name = "load"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -6), Vector2(0, -6), Vector2(-1, -6), Vector2(-2, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 6), Vector2(0, 6), Vector2(-1, 6), Vector2(-2, 6)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rua38"]
 _data = {
@@ -59,11 +131,44 @@ _data = {
 "load": SubResource("Animation_ayqji")
 }
 
+[sub_resource type="Gradient" id="Gradient_onj31"]
+colors = PackedColorArray(1, 1, 1, 0.498039, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5nmjw"]
+gradient = SubResource("Gradient_onj31")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5dmk2"]
+particle_flag_disable_z = true
+direction = Vector3(0.5, -1, 0)
+spread = 5.0
+gravity = Vector3(0, -10, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 2.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_5nmjw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a0bh5"]
+particle_flag_disable_z = true
+direction = Vector3(0.5, 1, 0)
+spread = 5.0
+gravity = Vector3(0, -10, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 2.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_5nmjw")
+
 [node name="Cannon" type="Sprite2D"]
 texture = ExtResource("1_2hvrk")
 hframes = 5
 script = ExtResource("2_gkcay")
-bullet = ExtResource("3_vpuc7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -75,3 +180,15 @@ position = Vector2(8, 0)
 item_scene = ExtResource("3_vpuc7")
 parent_node = NodePath("..")
 use_rotation = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(1, -6)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_5dmk2")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(1, 6)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_a0bh5")

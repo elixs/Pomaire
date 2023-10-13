@@ -367,9 +367,10 @@ position = Vector2(20, 0)
 [node name="PickableMarker" type="Marker2D" parent="Pivot"]
 position = Vector2(-10, 5)
 
-[node name="Cannon" parent="Pivot" instance=ExtResource("6_grglj")]
-position = Vector2(21, -29)
-rotation = -0.40702
+[node name="CannonPivot" type="Node2D" parent="Pivot"]
+
+[node name="Cannon" parent="Pivot/CannonPivot" instance=ExtResource("6_grglj")]
+position = Vector2(36, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_pojv8")
