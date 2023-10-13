@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dio1bwpro6vr0"]
+[gd_scene load_steps=39 format=3 uid="uid://dio1bwpro6vr0"]
 
 [ext_resource type="Script" path="res://scenes/san_martin.gd" id="1_rwl31"]
 [ext_resource type="PackedScene" uid="uid://dgtooxn5361l" path="res://scenes/bullet.tscn" id="2_mqd8c"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d2h1brcsm7cov" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/humanoids/white.png" id="5_3jm1x"]
 [ext_resource type="PackedScene" uid="uid://ddaxmm1wol6ej" path="res://scenes/ui/shots_counter.tscn" id="5_3ye74"]
 [ext_resource type="PackedScene" uid="uid://de4vkhl8t8jrr" path="res://scenes/ui/hud.tscn" id="6_6itj0"]
+[ext_resource type="PackedScene" uid="uid://cflx11ole8h75" path="res://scenes/cannon.tscn" id="6_grglj"]
 [ext_resource type="Script" path="res://scenes/pickable_area.gd" id="8_axdo7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw0lo"]
@@ -365,6 +366,10 @@ position = Vector2(20, 0)
 
 [node name="PickableMarker" type="Marker2D" parent="Pivot"]
 position = Vector2(-10, 5)
+
+[node name="Cannon" parent="Pivot" instance=ExtResource("6_grglj")]
+position = Vector2(21, -29)
+rotation = -0.40702
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_pojv8")

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var jump_speed = 200
 var acceleration = 1000
 var gravity = 300
+@onready var cannon = $Pivot/Cannon
 
 var health = 100:
 	set(value):
@@ -110,7 +111,7 @@ func fire():
 	tween.parallel().tween_property(sprite_2d, "position:y", -19, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(sprite_2d, "scale", Vector2.ONE * 2, 0.1)
 	tween.parallel().tween_property(sprite_2d, "position:y", -3, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	
+	cannon.fire()
 	
 func take_damage():
 	if health > 0:
