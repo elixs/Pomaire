@@ -37,6 +37,8 @@ var current_pickable: Pickable = null
 @onready var pickable_marker = $Pivot/PickableMarker
 @onready var pickable_drop_marker = $Pivot/PickableDropMarker
 
+@onready var cannon: Sprite2D = $Pivot/CannonPivot/Cannon
+@onready var cannon_pivot: Node2D = $Pivot/CannonPivot
 
 
 var was_on_floor = false
@@ -99,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	was_on_floor = is_on_floor()
 	
 	cannon_pivot.global_rotation = (get_global_mouse_position() - global_position).angle()
-	
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
