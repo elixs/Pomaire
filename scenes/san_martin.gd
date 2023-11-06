@@ -4,8 +4,7 @@ extends CharacterBody2D
 @export var jump_speed = 200
 var acceleration = 1000
 var gravity = 300
-@onready var cannon = %Cannon
-@onready var cannon_pivot = $Pivot/CannonPivot
+
 
 var health = 100:
 	set(value):
@@ -37,9 +36,8 @@ var current_pickable: Pickable = null
 @onready var pickable_marker = $Pivot/PickableMarker
 @onready var pickable_drop_marker = $Pivot/PickableDropMarker
 
-@onready var cannon: Sprite2D = $Pivot/CannonPivot/Cannon
-@onready var cannon_pivot: Node2D = $Pivot/CannonPivot
-
+@onready var cannon = %Cannon
+@onready var cannon_pivot = $Pivot/CannonPivot
 
 var was_on_floor = false
 

@@ -1,6 +1,5 @@
 [gd_scene load_steps=4 format=3 uid="uid://cktmwhn76bbbn"]
 
-[ext_resource type="Script" path="res://scenes/cannon_bullet.gd" id="1_3slx3"]
 [ext_resource type="Texture2D" uid="uid://bkig4yufm4k7g" path="res://assets/space-base-platform-shooter-8-bit-art-graphics-pack/graphics/projectiles/proj_from_cannon.png" id="1_qicdq"]
 [ext_resource type="Script" path="res://scenes/cannon_bullet.gd" id="1_x8ewd"]
 
