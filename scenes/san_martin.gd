@@ -4,7 +4,8 @@ extends CharacterBody2D
 @export var jump_speed = 200
 var acceleration = 1000
 var gravity = 300
-@onready var cannon = $Pivot/Cannon
+@onready var cannon = %Cannon
+@onready var cannon_pivot = $Pivot/CannonPivot
 
 var health = 100:
 	set(value):
@@ -66,6 +67,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire"):
 		fire()
 	
+	if Input.is_action_just_pressed("fire"):
+		cannon.charge()
+	
+	if Input.is_action_just_released("fire"):
+		cannon.fire()
+	
 	if Input.is_action_just_pressed("interact"):
 		interact()
 	
@@ -90,7 +97,9 @@ func _physics_process(delta: float) -> void:
 	if not was_on_floor and is_on_floor():
 		spawn_dust()
 	was_on_floor = is_on_floor()
-
+	
+	cannon_pivot.global_rotation = (get_global_mouse_position() - global_position).angle()
+	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -111,7 +120,6 @@ func fire():
 	tween.parallel().tween_property(sprite_2d, "position:y", -19, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(sprite_2d, "scale", Vector2.ONE * 2, 0.1)
 	tween.parallel().tween_property(sprite_2d, "position:y", -3, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	cannon.fire()
 	
 func take_damage():
 	if health > 0:
